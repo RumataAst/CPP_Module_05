@@ -6,16 +6,16 @@
 
 class Bureaucrat {
 protected:
-    int        _grade;
+    unsigned int        _grade;
     const std::string   _name;
 
 public:
-    Bureaucrat(int grade,const std::string &name);
+    Bureaucrat(unsigned int grade,const std::string &name);
     Bureaucrat(const Bureaucrat &copy);
     Bureaucrat &operator= (const Bureaucrat &source);
     ~Bureaucrat();
 
-    int    getGrade() const;
+    unsigned int    getGrade() const;
     std::string     getName() const;
 
     void    gradeIncrease();
@@ -24,7 +24,7 @@ public:
     class   GradeTooHighException : public std::exception {
         public:
             const char*		what() const throw() {
-                return ("Nobody should rise above 1st rank");
+                return ("Above 1 is only the skies");
             }
     };
     class   GradeTooLowException : public std::exception {

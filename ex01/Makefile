@@ -1,13 +1,13 @@
 
 NAME	= Bureaucrat
-SRCS    := main.cpp Bureaucrat.cpp
+SRCS    := main.cpp Bureaucrat.cpp Form.cpp
 BIN		:= bin
 OBJS    := $(addprefix $(BIN)/, $(SRCS:.cpp=.o))
 INC		:= include
 
 # Compiler and flags
 CXX			= c++
-CXXFLAGS	= -g -Wall -Wextra -Werror -std=c++98 -I${INC}
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -I${INC}
 
 # Rules
 all: $(NAME)
