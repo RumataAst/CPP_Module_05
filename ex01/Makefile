@@ -1,5 +1,5 @@
 
-NAME	= Bureaucrat
+NAME	= Form
 SRCS    := main.cpp Bureaucrat.cpp Form.cpp
 BIN		:= bin
 OBJS    := $(addprefix $(BIN)/, $(SRCS:.cpp=.o))

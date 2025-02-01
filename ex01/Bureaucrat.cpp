@@ -27,7 +27,7 @@ int    Bureaucrat::getGrade() const {
     return _grade;
 }
 
-std::string     Bureaucrat::getName() const {
+const std::string     &Bureaucrat::getName() const {
     return _name;
 }
 
@@ -44,6 +44,25 @@ void    Bureaucrat::gradeDecrease() {
     else
         this->_grade++;
 }
+
+/*  
+    Bureucrate tries to change the signed status in the form class
+    by calling member function of Form class. If the grade is not sufficient 
+    or the form is already signed print error.
+*/
+void Bureaucrat::signForm(Form &form) {
+    int result = form.beSigned(*this);
+    if (result == 0) {
+        std::cout << _name << " signed " << form.getName() << std::endl;
+    }
+    else if (result == 1)
+        std::cout << _name << " couldn’t sign " << form.getName()
+        << " because the grade is too low" << std::endl;
+    else
+        std::cout << _name << " couldn’t sign " << form.getName()
+        << " because the form was already signed. Kafka sends his regards" << std::endl;
+}
+
 
 std::ostream &operator <<(std::ostream &out, const Bureaucrat &Bureaucrat) {
     out << Bureaucrat.getName() << ", bureaucrat grade " << Bureaucrat.getGrade() << "." << std::endl;

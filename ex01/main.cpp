@@ -1,47 +1,40 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
+
 #define SEPARATOR std::cout << "------------------------------------" << std::endl;
 
 
 int main() {
+    Bureaucrat loser(150, "loser");
+    Bureaucrat boss(1, "boss");
+    Form    form("big law", 15, 1);
     try {
-    Bureaucrat test_1(160, "test_1");
+    Form    form_mistake("mistake", 154, 1);
     }
-    catch (Bureaucrat::GradeTooLowException &e) {
+    catch (Form::GradeTooLowException &e) {
         std::cout << e.what() << '\n';
     }
-
     try {
-    Bureaucrat test_2(-15, "test_2");
+    Form    form_mistake_1("mistake", 1, -5);
     }
-    catch (Bureaucrat::GradeTooHighException &e) {
+    catch (Form::GradeTooHighException &e) {
         std::cout << e.what() << '\n';
     }
     SEPARATOR
-    Bureaucrat test_5(2, "test_5");
-    Bureaucrat test_6(149, "test_6");
-
-    std::cout << test_5;
-    test_5.gradeIncrease();
-    std::cout << test_5;
-    try {
-        test_5.gradeIncrease();
-    }
-    catch (Bureaucrat::GradeTooHighException &e){
-        std::cout << e.what() << '\n';
-    }
-    std::cout << test_5 << std::endl;
+    std::cout << loser << std::endl;
+    std::cout << boss << std::endl;
+    std::cout << form << std::endl;
 
     SEPARATOR
-    std::cout << test_6 << std::endl;
-    test_6.gradeDecrease();
-    std::cout << test_6;
     try {
-    test_6.gradeDecrease();
+    loser.signForm(form);
     }
-    catch (Bureaucrat::GradeTooLowException &e) {
+    catch (Form::GradeTooLowException &e) {
         std::cout << e.what() << '\n';
     }
-    std::cout << test_6 << std::endl;
+    SEPARATOR
+    boss.signForm(form);
+    boss.signForm(form);
 
     return 0;
 }

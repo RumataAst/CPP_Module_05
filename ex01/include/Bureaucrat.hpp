@@ -18,7 +18,7 @@ public:
     ~Bureaucrat();
 
     int    getGrade() const;
-    std::string     getName() const;
+    const std::string     &getName() const;
 
     void    gradeIncrease();
     void    gradeDecrease();
@@ -35,7 +35,6 @@ public:
                 return ("The grade 150 is the lowest of the low");
             }
     };
-
 
     void signForm(Form &form);
 };
