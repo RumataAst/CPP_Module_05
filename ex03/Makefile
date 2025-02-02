@@ -1,5 +1,5 @@
 
-NAME	= 28B_Form
+NAME	= Intern
 NAME_Debug = Debug
 SRCS    := main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 BIN		:= bin
