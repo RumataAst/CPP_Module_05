@@ -37,7 +37,7 @@ AForm* Intern::makeForm(std::string formName, std::string formTarget) {
         case 2:
             return new ShrubberyCreationForm(formTarget);
         case 3:
-            std::cout << formName <<" is not valid" << std::endl;
+            throw(BadFormException());
     }
     return NULL;
 }

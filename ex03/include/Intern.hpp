@@ -16,4 +16,10 @@ public:
     ~Intern();
 
     AForm* makeForm(std::string formName, std::string formTarget); 
+    class BadFormException : public std::exception {
+        public:
+            const char*     what() const throw() {
+                return ("Bad form, please choose one of the following: Presidential Pardon Form, Robotomy Request Form, Shrubbery Creation Form");
+            }
+    };
 };
