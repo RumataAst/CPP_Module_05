@@ -1,10 +1,10 @@
 #pragma once
 
 #include <iostream>
-#include "Form.hpp"
+#include "AForm.hpp"
 #define LOWGRADE 150
 #define HIGHGRADE 1
-class Form;
+class AForm;
 
 class Bureaucrat {
 protected:
@@ -36,7 +36,7 @@ public:
             }
     };
 
-    void signForm(Form &form);
+    void signForm(AForm &A);
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &Bureaucrat);

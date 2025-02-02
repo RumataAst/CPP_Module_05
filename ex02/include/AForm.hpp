@@ -40,6 +40,9 @@ public:
     bool                getSignedStatus() const;
     int                 getGradeToSign() const;
     int                 getGradeToExec() const;
+
+    bool                checkExecStatus(Bureaucrat const & executor) const;
+    virtual void        execute(Bureaucrat const & executor) const = 0;
 };
 
 std::ostream &operator<<(std::ostream &out, const AForm &AForm);

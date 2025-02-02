@@ -1,40 +1,47 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "Intern.hpp"
 
 #define SEPARATOR std::cout << "------------------------------------" << std::endl;
 
 
 int main() {
+    Intern someRandomIntern;
+    AForm   *rrf_1 ,*rrf_2, *rrf_3;
+
+    // Intern can create 3 forms: Presidential Pardon Form; Robotomy Request Form; Shrubbery Creation Form
+    rrf_1 = someRandomIntern.makeForm("Presidential Pardon Form", "Bender");
+    rrf_2 = someRandomIntern.makeForm("Robotomy Request Form", "Bender");
+    rrf_3 = someRandomIntern.makeForm("Shrubbery Creation Form", "Bender");
+
+    std::cout << "1st form " << *rrf_1 << std::endl;
+    std::cout << "2nd form " << *rrf_2 << std::endl;
+    std::cout << "3rd form " << *rrf_3 << std::endl;
+
     Bureaucrat loser(150, "loser");
     Bureaucrat boss(1, "boss");
-    Form    form("big law", 15, 1);
-    try {
-    Form    form_mistake("mistake", 154, 1);
-    }
-    catch (Form::GradeTooLowException &e) {
-        std::cout << e.what() << '\n';
-    }
-    try {
-    Form    form_mistake_1("mistake", 1, -5);
-    }
-    catch (Form::GradeTooHighException &e) {
-        std::cout << e.what() << '\n';
-    }
-    SEPARATOR
-    std::cout << loser << std::endl;
-    std::cout << boss << std::endl;
-    std::cout << form << std::endl;
 
     SEPARATOR
-    try {
-    loser.signForm(form);
-    }
-    catch (Form::GradeTooLowException &e) {
-        std::cout << e.what() << '\n';
-    }
+    boss.signForm(*rrf_1);
+    rrf_1->execute(loser);
+    rrf_1->execute(boss);
+
     SEPARATOR
-    boss.signForm(form);
-    boss.signForm(form);
+    boss.signForm(*rrf_2);
+    rrf_2->execute(loser);
+    rrf_2->execute(boss);
+
+    SEPARATOR
+    boss.signForm(*rrf_3);
+    rrf_3->execute(loser);
+    rrf_3->execute(boss);
+
+    delete rrf_1;
+    delete rrf_2;
+    delete rrf_3;
 
     return 0;
 }

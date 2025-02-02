@@ -10,7 +10,7 @@ AForm::AForm(const std::string &name, const int gradeToSign, const int gradeToEx
 
 AForm::AForm(const AForm &copy)
      : _name(copy._name), _signed(false), _gradeToSign(copy._gradeToSign), _gradeToExec(copy._gradeToExec) {
-        std::cout << "Copy of the object was created" << std::endl;
+        // std::cout << "Copy of the object was created" << std::endl;
      }
 
 AForm &AForm::operator = (const AForm &source) {
@@ -51,6 +51,18 @@ int         AForm::getGradeToExec() const {
     return _gradeToExec;
 }
 
+bool AForm::checkExecStatus(Bureaucrat const & executor) const{
+    if (executor.getGrade() > this->getGradeToExec()){
+        std::cout << "Lesser being is trying to execute the order" << std::endl;
+        return 1;
+    }
+    else if (this->getSignedStatus() == false) {
+        std::cout << "The form hasn't been signed yet" << std::endl;
+        return 1;
+    }
+    return 0;
+}
+
 std::ostream &operator<<(std::ostream &out, const AForm &Form) {
     out << "Form : " << Form.getName() << " is currently ";
     if (Form.getSignedStatus() == false) {
@@ -62,3 +74,4 @@ std::ostream &operator<<(std::ostream &out, const AForm &Form) {
     out << " Minumum grade to sign is " << Form.getGradeToSign() << " and grade to execute " << Form.getGradeToExec();
     return out;
 }
+

@@ -50,7 +50,7 @@ void    Bureaucrat::gradeDecrease() {
     by calling member function of Form class. If the grade is not sufficient 
     or the form is already signed print error.
 */
-void Bureaucrat::signForm(Form &form) {
+void Bureaucrat::signForm(AForm &form) {
     int result = form.beSigned(*this);
     if (result == 0) {
         std::cout << _name << " signed " << form.getName() << std::endl;

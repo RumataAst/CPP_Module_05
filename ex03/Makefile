@@ -1,6 +1,7 @@
 
-NAME	= Form
-SRCS    := main.cpp Bureaucrat.cpp Form.cpp
+NAME	= 28B_Form
+NAME_Debug = Debug
+SRCS    := main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 BIN		:= bin
 OBJS    := $(addprefix $(BIN)/, $(SRCS:.cpp=.o))
 INC		:= include
@@ -8,12 +9,17 @@ INC		:= include
 # Compiler and flags
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -I${INC}
+CXXDEBUG	= -g
 
 # Rules
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+debug: CXXFLAGS += $(CXXDEBUG)
+debug: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME_Debug)
 
 $(BIN)/%.o: %.cpp | $(BIN)
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
@@ -25,7 +31,7 @@ clean:
 	@rm -rf $(BIN)
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(NAME_Debug)
 
 re: fclean all
 

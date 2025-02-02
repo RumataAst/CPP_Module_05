@@ -1,6 +1,6 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form(const std::string &name, const int gradeToSign, const int gradeToExec )
+AForm::AForm(const std::string &name, const int gradeToSign, const int gradeToExec )
     : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec) {
         if (gradeToExec > LOWGRADE_FORM || gradeToSign > LOWGRADE_FORM)
             throw (GradeTooLowException());
@@ -8,21 +8,21 @@ Form::Form(const std::string &name, const int gradeToSign, const int gradeToExec
             throw (GradeTooHighException());
 }
 
-Form::Form(const Form &copy)
+AForm::AForm(const AForm &copy)
      : _name(copy._name), _signed(false), _gradeToSign(copy._gradeToSign), _gradeToExec(copy._gradeToExec) {
-        std::cout << "Copy of the object was created" << std::endl;
+        // std::cout << "Copy of the object was created" << std::endl;
      }
 
-Form &Form::operator = (const Form &source) {
+AForm &AForm::operator = (const AForm &source) {
     if (this != &source) {
         std::cout << "Only 1 original form is allowed" << std::endl;
     }
     return *this;
 }
 
-Form::~Form () {}
+AForm::~AForm () {}
 
-int Form::beSigned(Bureaucrat &bureaucrat) {
+int AForm::beSigned(Bureaucrat &bureaucrat) {
     if (_signed == 1)
         return 2;
     else if (bureaucrat.getGrade() > this->_gradeToSign) {
@@ -35,23 +35,35 @@ int Form::beSigned(Bureaucrat &bureaucrat) {
     }
 }
 
-const std::string &Form::getName() const {
+const std::string &AForm::getName() const {
     return _name;
 }
 
-bool        Form::getSignedStatus() const {
+bool        AForm::getSignedStatus() const {
     return _signed;
 }
 
-int         Form::getGradeToSign() const {
+int         AForm::getGradeToSign() const {
     return _gradeToSign;
 }
 
-int         Form::getGradeToExec() const {
+int         AForm::getGradeToExec() const {
     return _gradeToExec;
 }
 
-std::ostream &operator<<(std::ostream &out, const Form &Form) {
+bool AForm::checkExecStatus(Bureaucrat const & executor) const{
+    if (executor.getGrade() > this->getGradeToExec()){
+        std::cout << "Lesser being is trying to execute the order" << std::endl;
+        return 1;
+    }
+    else if (this->getSignedStatus() == false) {
+        std::cout << "The form hasn't been signed yet" << std::endl;
+        return 1;
+    }
+    return 0;
+}
+
+std::ostream &operator<<(std::ostream &out, const AForm &Form) {
     out << "Form : " << Form.getName() << " is currently ";
     if (Form.getSignedStatus() == false) {
         out << "not signed.";
@@ -62,3 +74,4 @@ std::ostream &operator<<(std::ostream &out, const Form &Form) {
     out << " Minumum grade to sign is " << Form.getGradeToSign() << " and grade to execute " << Form.getGradeToExec();
     return out;
 }
+
